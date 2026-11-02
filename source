@@ -344,7 +344,7 @@ Scale.Name = randomString()
 Holder.Name = randomString()
 Holder.Parent = ScaledHolder
 Holder.Active = true
-Holder.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Holder.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 Holder.BorderSizePixel = 0
 Holder.Position = UDim2.new(1, -250, 1, -220)
 Holder.Size = UDim2.new(0, 250, 0, 220)
@@ -354,7 +354,7 @@ table.insert(shade2,Holder)
 Title.Name = "Title"
 Title.Parent = Holder
 Title.Active = true
-Title.BackgroundColor3 = Color3.fromRGB(36,36,37)
+Title.BackgroundColor3 = Color3.fromRGB(255,255,255)
 Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
@@ -391,7 +391,7 @@ do
 	end
 end
 
-Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Title.ZIndex = 10
 table.insert(shade1,Title)
 table.insert(text1,Title)
@@ -415,7 +415,7 @@ Cmdbar.Size = UDim2.new(0, 240, 0, 25)
 Cmdbar.Font = Enum.Font.SourceSans
 Cmdbar.TextSize = 18
 Cmdbar.TextXAlignment = Enum.TextXAlignment.Left
-Cmdbar.TextColor3 = Color3.new(1, 1, 1)
+Cmdbar.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Cmdbar.Text = ""
 Cmdbar.ZIndex = 10
 Cmdbar.PlaceholderText = "Command Bar"
@@ -491,7 +491,7 @@ Prefix.Size = UDim2.new(1, -10, 0, 20)
 Prefix.Font = Enum.Font.SourceSans
 Prefix.TextSize = 14
 Prefix.Text = "Prefix"
-Prefix.TextColor3 = Color3.new(1, 1, 1)
+Prefix.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Prefix.TextXAlignment = Enum.TextXAlignment.Left
 Prefix.ZIndex = 10
 table.insert(shade2,Prefix)
@@ -540,7 +540,7 @@ function makeSettingsButton(name,iconID,off)
 	label.Position = UDim2.new(0,28,0,0)
 	label.Size = UDim2.new(1,-28,1,0)
 	label.Font = Enum.Font.SourceSans
-	label.TextColor3 = Color3.new(1, 1, 1)
+	label.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 	label.TextSize = 14
 	label.ZIndex = 10
 	label.TextXAlignment = Enum.TextXAlignment.Left
@@ -577,7 +577,7 @@ StayOpen.Size = UDim2.new(1, -10, 0, 20)
 StayOpen.Font = Enum.Font.SourceSans
 StayOpen.TextSize = 14
 StayOpen.Text = "Keep Menu Open"
-StayOpen.TextColor3 = Color3.new(1, 1, 1)
+StayOpen.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 StayOpen.TextXAlignment = Enum.TextXAlignment.Left
 StayOpen.ZIndex = 10
 table.insert(shade2,StayOpen)
@@ -602,7 +602,7 @@ On.Size = UDim2.new(0, 16, 0, 16)
 On.Font = Enum.Font.SourceSans
 On.FontSize = Enum.FontSize.Size14
 On.Text = ""
-On.TextColor3 = Color3.new(0, 0, 0)
+On.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 On.ZIndex = 10
 
 Positions = makeSettingsButton("Edit/Goto Waypoints",getcustomasset("bloodconsole/assets/editwaypoints.png"))
@@ -632,7 +632,7 @@ Example.Visible = false
 Example.Font = Enum.Font.SourceSans
 Example.TextSize = 18
 Example.Text = "Example"
-Example.TextColor3 = Color3.new(1, 1, 1)
+Example.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Example.TextXAlignment = Enum.TextXAlignment.Left
 Example.ZIndex = 10
 table.insert(text1,Example)
@@ -654,7 +654,7 @@ Title_2.Size = UDim2.new(0, 250, 0, 20)
 Title_2.Font = Enum.Font.SourceSans
 Title_2.TextSize = 14
 Title_2.Text = "Notification Title"
-Title_2.TextColor3 = Color3.new(1, 1, 1)
+Title_2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Title_2.ZIndex = 10
 table.insert(shade2,Title_2)
 table.insert(text1,Title_2)
@@ -668,7 +668,7 @@ Text_2.Size = UDim2.new(0, 240, 0, 75)
 Text_2.Font = Enum.Font.SourceSans
 Text_2.TextSize = 16
 Text_2.Text = "Notification Text"
-Text_2.TextColor3 = Color3.new(1, 1, 1)
+Text_2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Text_2.TextWrapped = true
 Text_2.ZIndex = 10
 table.insert(text1,Text_2)
@@ -724,7 +724,7 @@ Title_3.Size = UDim2.new(0, 200, 0, 20)
 Title_3.Font = Enum.Font.SourceSans
 Title_3.TextSize = 14
 Title_3.Text = ""
-Title_3.TextColor3 = Color3.new(1, 1, 1)
+Title_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Title_3.TextTransparency = 0.1
 Title_3.ZIndex = 10
 table.insert(shade2,Title_3)
@@ -739,7 +739,7 @@ Description.Position = UDim2.new(0,10,0,18)
 Description.Font = Enum.Font.SourceSans
 Description.TextSize = 16
 Description.Text = ""
-Description.TextColor3 = Color3.new(1, 1, 1)
+Description.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Description.TextTransparency = 0.1
 Description.TextWrapped = true
 Description.ZIndex = 10
@@ -773,7 +773,7 @@ Credits.Size = UDim2.new(0, 250, 0, 20)
 Credits.Font = Enum.Font.SourceSansLight
 Credits.FontSize = Enum.FontSize.Size14
 Credits.Text = "Mutant Bloodcell"
-Credits.TextColor3 = Color3.new(1, 1, 1)
+Credits.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Credits.ZIndex = 10
 
 KeybindsFrame.Name = "KeybindsFrame"
@@ -795,7 +795,7 @@ Close.Size = UDim2.new(0, 40, 0, 20)
 Close.Font = Enum.Font.SourceSans
 Close.TextSize = 14
 Close.Text = "Close"
-Close.TextColor3 = Color3.new(1, 1, 1)
+Close.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Close.ZIndex = 10
 table.insert(shade2,Close)
 table.insert(text1,Close)
@@ -809,7 +809,7 @@ Add.Size = UDim2.new(0, 40, 0, 20)
 Add.Font = Enum.Font.SourceSans
 Add.TextSize = 14
 Add.Text = "Add"
-Add.TextColor3 = Color3.new(1, 1, 1)
+Add.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Add.ZIndex = 10
 table.insert(shade2,Add)
 table.insert(text1,Add)
@@ -823,7 +823,7 @@ Delete.Size = UDim2.new(0, 40, 0, 20)
 Delete.Font = Enum.Font.SourceSans
 Delete.TextSize = 14
 Delete.Text = "Clear"
-Delete.TextColor3 = Color3.new(1, 1, 1)
+Delete.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Delete.ZIndex = 10
 table.insert(shade2,Delete)
 table.insert(text1,Delete)
@@ -861,7 +861,7 @@ Text_3.Size = UDim2.new(0, 240, 0, 20)
 Text_3.Font = Enum.Font.SourceSans
 Text_3.TextSize = 14
 Text_3.Text = "nom"
-Text_3.TextColor3 = Color3.new(1, 1, 1)
+Text_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Text_3.TextXAlignment = Enum.TextXAlignment.Left
 Text_3.ZIndex = 10
 table.insert(shade2,Text_3)
@@ -1170,7 +1170,7 @@ Close_3.Size = UDim2.new(0, 40, 0, 20)
 Close_3.Font = Enum.Font.SourceSans
 Close_3.TextSize = 14
 Close_3.Text = "Close"
-Close_3.TextColor3 = Color3.new(1, 1, 1)
+Close_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Close_3.ZIndex = 10
 table.insert(shade2,Close_3)
 table.insert(text1,Close_3)
@@ -1184,7 +1184,7 @@ Delete_5.Size = UDim2.new(0, 40, 0, 20)
 Delete_5.Font = Enum.Font.SourceSans
 Delete_5.TextSize = 14
 Delete_5.Text = "Clear"
-Delete_5.TextColor3 = Color3.new(1, 1, 1)
+Delete_5.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Delete_5.ZIndex = 10
 table.insert(shade2,Delete_5)
 table.insert(text1,Delete_5)
@@ -1198,7 +1198,7 @@ Part.Size = UDim2.new(0, 40, 0, 20)
 Part.Font = Enum.Font.SourceSans
 Part.TextSize = 14
 Part.Text = "Part"
-Part.TextColor3 = Color3.new(1, 1, 1)
+Part.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Part.ZIndex = 10
 table.insert(shade2,Part)
 table.insert(text1,Part)
@@ -1238,7 +1238,7 @@ Text_5.Size = UDim2.new(0, 240, 0, 20)
 Text_5.Font = Enum.Font.SourceSans
 Text_5.TextSize = 14
 Text_5.Text = "Position"
-Text_5.TextColor3 = Color3.new(1, 1, 1)
+Text_5.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Text_5.TextXAlignment = Enum.TextXAlignment.Left
 Text_5.ZIndex = 10
 table.insert(shade2,Text_5)
@@ -1291,7 +1291,7 @@ Close_2.Size = UDim2.new(0, 40, 0, 20)
 Close_2.Font = Enum.Font.SourceSans
 Close_2.TextSize = 14
 Close_2.Text = "Close"
-Close_2.TextColor3 = Color3.new(1, 1, 1)
+Close_2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Close_2.ZIndex = 10
 table.insert(shade2,Close_2)
 table.insert(text1,Close_2)
@@ -1305,7 +1305,7 @@ Delete_3.Size = UDim2.new(0, 40, 0, 20)
 Delete_3.Font = Enum.Font.SourceSans
 Delete_3.TextSize = 14
 Delete_3.Text = "Clear"
-Delete_3.TextColor3 = Color3.new(1, 1, 1)
+Delete_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Delete_3.ZIndex = 10
 table.insert(shade2,Delete_3)
 table.insert(text1,Delete_3)
@@ -1343,7 +1343,7 @@ Text_4.Size = UDim2.new(0, 240, 0, 20)
 Text_4.Font = Enum.Font.SourceSans
 Text_4.TextSize = 14
 Text_4.Text = "honk"
-Text_4.TextColor3 = Color3.new(1, 1, 1)
+Text_4.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Text_4.TextXAlignment = Enum.TextXAlignment.Left
 Text_4.ZIndex = 10
 table.insert(shade2,Text_4)
@@ -1382,7 +1382,7 @@ Close_4.Size = UDim2.new(0, 40, 0, 20)
 Close_4.Font = Enum.Font.SourceSans
 Close_4.TextSize = 14
 Close_4.Text = "Close"
-Close_4.TextColor3 = Color3.new(1, 1, 1)
+Close_4.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Close_4.ZIndex = 10
 table.insert(shade2,Close_4)
 table.insert(text1,Close_4)
@@ -1396,7 +1396,7 @@ Add_3.Size = UDim2.new(0, 40, 0, 20)
 Add_3.Font = Enum.Font.SourceSans
 Add_3.TextSize = 14
 Add_3.Text = "Add"
-Add_3.TextColor3 = Color3.new(1, 1, 1)
+Add_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Add_3.ZIndex = 10
 table.insert(shade2,Add_3)
 table.insert(text1,Add_3)
@@ -1435,7 +1435,7 @@ Text_6.Size = UDim2.new(0, 240, 0, 20)
 Text_6.Font = Enum.Font.SourceSans
 Text_6.TextSize = 14
 Text_6.Text = "F4 > Toggle Fly"
-Text_6.TextColor3 = Color3.new(1, 1, 1)
+Text_6.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Text_6.TextXAlignment = Enum.TextXAlignment.Left
 Text_6.ZIndex = 10
 table.insert(shade2,Text_6)
@@ -1501,7 +1501,7 @@ AddPlugin.Size = UDim2.new(0, 115, 0, 50)
 AddPlugin.Font = Enum.Font.SourceSans
 AddPlugin.TextSize = 14
 AddPlugin.Text = "Add Plugin"
-AddPlugin.TextColor3 = Color3.new(1, 1, 1)
+AddPlugin.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 AddPlugin.ZIndex = 10
 table.insert(shade2,AddPlugin)
 table.insert(text1,AddPlugin)
@@ -1515,7 +1515,7 @@ FileName.Size = UDim2.new(0, 200, 0, 50)
 FileName.Font = Enum.Font.SourceSans
 FileName.TextSize = 14
 FileName.Text = "Plugin File Name"
-FileName.TextColor3 = Color3.new(1, 1, 1)
+FileName.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 FileName.ZIndex = 10
 table.insert(shade2,FileName)
 table.insert(text1,FileName)
@@ -1566,7 +1566,7 @@ PopupText_3.ZIndex = 10
 PopupText_3.Font = Enum.Font.SourceSans
 PopupText_3.TextSize = 14
 PopupText_3.Text = "Add Plugins"
-PopupText_3.TextColor3 = Color3.new(1, 1, 1)
+PopupText_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 PopupText_3.TextWrapped = true
 table.insert(text1,PopupText_3)
 
@@ -1595,8 +1595,8 @@ AliasHint.Size = UDim2.new(0, 200, 0, 50)
 AliasHint.Font = Enum.Font.SourceSansItalic
 AliasHint.TextSize = 16
 AliasHint.Text = "Add aliases by using the 'addalias' command"
-AliasHint.TextColor3 = Color3.new(1, 1, 1)
-AliasHint.TextStrokeColor3 = Color3.new(1, 1, 1)
+AliasHint.TextColor3 = Color3.new(0.12, 0.12, 0.12)
+AliasHint.TextStrokeColor3 = Color3.new(0.12, 0.12, 0.12)
 AliasHint.TextWrapped = true
 AliasHint.ZIndex = 10
 table.insert(text1,AliasHint)
@@ -1610,8 +1610,8 @@ PluginsHint.Size = UDim2.new(0, 200, 0, 50)
 PluginsHint.Font = Enum.Font.SourceSansItalic
 PluginsHint.TextSize = 16
 PluginsHint.Text = "Download plugins from the BC Discord (discord.gg/zhh2ENe4xT)"
-PluginsHint.TextColor3 = Color3.new(1, 1, 1)
-PluginsHint.TextStrokeColor3 = Color3.new(1, 1, 1)
+PluginsHint.TextColor3 = Color3.new(0.12, 0.12, 0.12)
+PluginsHint.TextStrokeColor3 = Color3.new(0.12, 0.12, 0.12)
 PluginsHint.TextWrapped = true
 PluginsHint.ZIndex = 10
 table.insert(text1,PluginsHint)
@@ -1625,8 +1625,8 @@ PositionsHint.Size = UDim2.new(0, 200, 0, 70)
 PositionsHint.Font = Enum.Font.SourceSansItalic
 PositionsHint.TextSize = 16
 PositionsHint.Text = "Use the 'swp' or 'setwaypoint' command to add a position using your character (NOTE: Part teleports will not save)"
-PositionsHint.TextColor3 = Color3.new(1, 1, 1)
-PositionsHint.TextStrokeColor3 = Color3.new(1, 1, 1)
+PositionsHint.TextColor3 = Color3.new(0.12, 0.12, 0.12)
+PositionsHint.TextStrokeColor3 = Color3.new(0.12, 0.12, 0.12)
 PositionsHint.TextWrapped = true
 PositionsHint.ZIndex = 10
 table.insert(text1,PositionsHint)
@@ -1658,7 +1658,7 @@ ChoosePart.Size = UDim2.new(0, 75, 0, 30)
 ChoosePart.Font = Enum.Font.SourceSans
 ChoosePart.TextSize = 14
 ChoosePart.Text = "Select Part"
-ChoosePart.TextColor3 = Color3.new(1, 1, 1)
+ChoosePart.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 ChoosePart.ZIndex = 10
 table.insert(shade2,ChoosePart)
 table.insert(text1,ChoosePart)
@@ -1672,7 +1672,7 @@ CopyPath.Size = UDim2.new(0, 75, 0, 30)
 CopyPath.Font = Enum.Font.SourceSans
 CopyPath.TextSize = 14
 CopyPath.Text = "Copy Path"
-CopyPath.TextColor3 = Color3.new(1, 1, 1)
+CopyPath.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 CopyPath.ZIndex = 10
 table.insert(shade2,CopyPath)
 table.insert(text1,CopyPath)
@@ -1686,7 +1686,7 @@ Directions_3.Size = UDim2.new(0, 257, 0, 32)
 Directions_3.Font = Enum.Font.SourceSans
 Directions_3.TextSize = 14
 Directions_3.Text = 'Click on a part and then click the "Select Part" button below to set it as a teleport location'
-Directions_3.TextColor3 = Color3.new(1, 1, 1)
+Directions_3.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Directions_3.TextWrapped = true
 Directions_3.TextYAlignment = Enum.TextYAlignment.Top
 Directions_3.ZIndex = 10
@@ -1701,7 +1701,7 @@ Path.Size = UDim2.new(0, 360, 0, 16)
 Path.Font = Enum.Font.SourceSansItalic
 Path.TextSize = 14
 Path.Text = ""
-Path.TextColor3 = Color3.new(1, 1, 1)
+Path.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 Path.TextScaled = true
 Path.TextWrapped = true
 Path.TextYAlignment = Enum.TextYAlignment.Top
@@ -1724,7 +1724,7 @@ PopupText_5.ZIndex = 10
 PopupText_5.Font = Enum.Font.SourceSans
 PopupText_5.TextSize = 14
 PopupText_5.Text = "Teleport to Part"
-PopupText_5.TextColor3 = Color3.new(1, 1, 1)
+PopupText_5.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 PopupText_5.TextWrapped = true
 table.insert(text1,PopupText_5)
 
@@ -1785,7 +1785,7 @@ PopupText.ZIndex = 10
 PopupText.Font = Enum.Font.SourceSans
 PopupText.FontSize = Enum.FontSize.Size14
 PopupText.Text = "Logs"
-PopupText.TextColor3 = Color3.new(1, 1, 1)
+PopupText.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 PopupText.TextWrapped = true
 table.insert(text1,PopupText)
 
@@ -1835,7 +1835,7 @@ Clear.ZIndex = 10
 Clear.Font = Enum.Font.SourceSans
 Clear.FontSize = Enum.FontSize.Size14
 Clear.Text = "Clear"
-Clear.TextColor3 = Color3.new(1, 1, 1)
+Clear.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,Clear)
 table.insert(text1,Clear)
 
@@ -1849,7 +1849,7 @@ SaveChatlogs.ZIndex = 10
 SaveChatlogs.Font = Enum.Font.SourceSans
 SaveChatlogs.FontSize = Enum.FontSize.Size14
 SaveChatlogs.Text = "Save To .txt"
-SaveChatlogs.TextColor3 = Color3.new(1, 1, 1)
+SaveChatlogs.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,SaveChatlogs)
 table.insert(text1,SaveChatlogs)
 
@@ -1863,7 +1863,7 @@ Toggle.ZIndex = 10
 Toggle.Font = Enum.Font.SourceSans
 Toggle.FontSize = Enum.FontSize.Size14
 Toggle.Text = "Disabled"
-Toggle.TextColor3 = Color3.new(1, 1, 1)
+Toggle.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,Toggle)
 table.insert(text1,Toggle)
 
@@ -1902,7 +1902,7 @@ Toggle_2.ZIndex = 10
 Toggle_2.Font = Enum.Font.SourceSans
 Toggle_2.FontSize = Enum.FontSize.Size14
 Toggle_2.Text = "Disabled"
-Toggle_2.TextColor3 = Color3.new(1, 1, 1)
+Toggle_2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,Toggle_2)
 table.insert(text1,Toggle_2)
 
@@ -1916,7 +1916,7 @@ Clear_2.ZIndex = 10
 Clear_2.Font = Enum.Font.SourceSans
 Clear_2.FontSize = Enum.FontSize.Size14
 Clear_2.Text = "Clear"
-Clear_2.TextColor3 = Color3.new(1, 1, 1)
+Clear_2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,Clear_2)
 table.insert(text1,Clear_2)
 
@@ -1944,7 +1944,7 @@ selectChat.ZIndex = 10
 selectChat.Font = Enum.Font.SourceSans
 selectChat.FontSize = Enum.FontSize.Size14
 selectChat.Text = "Chat Logs"
-selectChat.TextColor3 = Color3.new(1, 1, 1)
+selectChat.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade2,selectChat)
 table.insert(text1,selectChat)
 
@@ -1958,7 +1958,7 @@ selectJoin.ZIndex = 10
 selectJoin.Font = Enum.Font.SourceSans
 selectJoin.FontSize = Enum.FontSize.Size14
 selectJoin.Text = "Join Logs"
-selectJoin.TextColor3 = Color3.new(1, 1, 1)
+selectJoin.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 table.insert(shade3,selectJoin)
 table.insert(text1,selectJoin)
 
@@ -2926,7 +2926,7 @@ end)()
 currentShade1 = Color3.fromRGB(36, 36, 37)
 currentShade2 = Color3.fromRGB(46, 46, 47)
 currentShade3 = Color3.fromRGB(78, 78, 79)
-currentText1 = Color3.new(1, 1, 1)
+currentText1 = Color3.new(0.12, 0.12, 0.12)
 currentText2 = Color3.new(0, 0, 0)
 currentScroll = Color3.fromRGB(78,78,79)
 
@@ -3004,7 +3004,7 @@ function createPopup(title, text)
 	Directions.Font = Enum.Font.SourceSans
 	Directions.TextSize = 14
 	Directions.Text = text
-	Directions.TextColor3 = Color3.new(1, 1, 1)
+	Directions.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 	Directions.TextWrapped = true
 	Directions.TextXAlignment = Enum.TextXAlignment.Left
 	Directions.TextYAlignment = Enum.TextYAlignment.Top
@@ -3025,7 +3025,7 @@ function createPopup(title, text)
 	PopupText.Font = Enum.Font.SourceSans
 	PopupText.TextSize = 14
 	PopupText.Text = title
-	PopupText.TextColor3 = Color3.new(1, 1, 1)
+	PopupText.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 	PopupText.TextWrapped = true
 
 	Exit.Name = "Exit"
@@ -3355,7 +3355,7 @@ function CreateJoinLabel(player, userId)
     info1.Font = Enum.Font.SourceSans
     info1.FontSize = Enum.FontSize.Size14
     info1.Text = "Username: " .. player.Name .. "\nJoined Server: " .. Time()
-    info1.TextColor3 = Color3.new(1, 1, 1)
+    info1.TextColor3 = Color3.new(0.12, 0.12, 0.12)
     info1.TextWrapped = true
     info1.TextXAlignment = Enum.TextXAlignment.Left
     info2.Name = randomString()
@@ -3368,7 +3368,7 @@ function CreateJoinLabel(player, userId)
     info2.Font = Enum.Font.SourceSans
     info2.FontSize = Enum.FontSize.Size14
     info2.Text = "User ID: " .. userId .. "\nAccount Age: " .. player.AccountAge .. "\nJoined Roblox: Loading..."
-    info2.TextColor3 = Color3.new(1, 1, 1)
+    info2.TextColor3 = Color3.new(0.12, 0.12, 0.12)
     info2.TextWrapped = true
     info2.TextXAlignment = Enum.TextXAlignment.Left
     info2.TextYAlignment = Enum.TextYAlignment.Center
@@ -5768,7 +5768,7 @@ function ESP(plr, logic)
 				TextLabel.Size = UDim2.new(0, 100, 0, 100)
 				TextLabel.Font = Enum.Font.SourceSansSemibold
 				TextLabel.TextSize = 20
-				TextLabel.TextColor3 = Color3.new(1, 1, 1)
+				TextLabel.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 				TextLabel.TextStrokeTransparency = 0
 				TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 				TextLabel.Text = 'Name: '..plr.Name
@@ -5921,7 +5921,7 @@ function Locate(plr)
 				TextLabel.Size = UDim2.new(0, 100, 0, 100)
 				TextLabel.Font = Enum.Font.SourceSansSemibold
 				TextLabel.TextSize = 20
-				TextLabel.TextColor3 = Color3.new(1, 1, 1)
+				TextLabel.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 				TextLabel.TextStrokeTransparency = 0
 				TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 				TextLabel.Text = 'Name: '..plr.Name
@@ -12275,7 +12275,7 @@ addcmd('hovername',{},function(args, speaker)
 	nameBox.Font = Enum.Font.Code
 	nameBox.TextSize = 16
 	nameBox.Text = ""
-	nameBox.TextColor3 = Color3.new(1, 1, 1)
+	nameBox.TextColor3 = Color3.new(0.12, 0.12, 0.12)
 	nameBox.TextStrokeTransparency = 0
 	nameBox.TextXAlignment = Enum.TextXAlignment.Left
 	nameBox.ZIndex = 10
