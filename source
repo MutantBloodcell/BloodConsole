@@ -2923,12 +2923,12 @@ reference = (function()
 	end)
 end)()
 
-currentShade1 = Color3.fromRGB(36, 36, 37)
-currentShade2 = Color3.fromRGB(46, 46, 47)
-currentShade3 = Color3.fromRGB(78, 78, 79)
-currentText1 = Color3.new(0.12, 0.12, 0.12)
-currentText2 = Color3.new(0, 0, 0)
-currentScroll = Color3.fromRGB(78,78,79)
+currentShade1 = Color3.fromRGB(245, 245, 245)
+currentShade2 = Color3.fromRGB(255, 255, 255)
+currentShade3 = Color3.fromRGB(220, 220, 220)
+currentText1 = Color3.fromRGB(30, 30, 30)
+currentText2 = Color3.fromRGB(255, 255, 255)
+currentScroll = Color3.fromRGB(200, 200, 200)
 
 defaultGuiScale = IsOnMobile and 0.9 or 1
 defaultsettings = {
