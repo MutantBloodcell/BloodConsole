@@ -902,7 +902,7 @@ table.insert(shade1,background_2)
 Dark_3.Name = "Dark"
 Dark_3.Parent = background_2
 Dark_3.Active = true
-Dark_3.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Dark_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Dark_3.BorderSizePixel = 0
 Dark_3.Position = UDim2.new(0, 135, 0, 0)
 Dark_3.Size = UDim2.new(0, 2, 0, 185)
@@ -1477,7 +1477,7 @@ table.insert(shade1,background_3)
 Dark_2.Name = "Dark"
 Dark_2.Parent = background_3
 Dark_2.Active = true
-Dark_2.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Dark_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Dark_2.BorderSizePixel = 0
 Dark_2.Position = UDim2.new(0, 222, 0, 0)
 Dark_2.Size = UDim2.new(0, 2, 0, 160)
