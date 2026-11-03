@@ -6507,7 +6507,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepBloodConsole and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeBC/bloodconsole/master/source'))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/MutantBloodcell/BloodConsole/master/source'))()")
 	end
 end)
 
