@@ -13081,6 +13081,47 @@ addcmd('removecmd',{'deletecmd'},function(args, speaker)
 	removecmd(args[1])
 end)
 
+local warping = false
+addcmd('timewarp', {}, function(args, speaker)
+    warping = true
+    notify("Time Warp", "Time cycle activated")
+    repeat
+        Lighting.ClockTime = Lighting.ClockTime + 0.1
+        task.wait(0.05)
+    until warping == false
+end)
+
+addcmd('untimewarp', {}, function(args, speaker)
+    warping = false
+end)
+
+local timeSyncActive = false
+addcmd('syncrealtime', {'synctime', 'realtime'}, function(args, speaker)
+    if timeSyncActive then return end
+    timeSyncActive = true
+    notify("Time Sync", "World time locked to your local device time.")
+    
+    task.spawn(function()
+        while timeSyncActive do
+            local dateTable = os.date("*t") -- Gets local time from device
+            local currentHour = dateTable.hour
+            local currentMinute = dateTable.min
+            local currentSecond = dateTable.sec
+            
+            -- 👍🏻
+            local decimalTime = currentHour + (currentMinute / 60) + (currentSecond / 3600)
+            
+            Lighting.ClockTime = decimalTime
+            task.wait(1)
+        end
+    end)
+end)
+
+addcmd('unsynctime', {'unrealtime'}, function(args, speaker)
+    timeSyncActive = false
+    notify("Time Sync", "Real-world time synchronization disabled.")
+end)
+
 addcmd("debug", {}, function(args, speaker)
     _G.BC_DEBUG = parseBoolean(args[1], true)
     return _G.BC_DEBUG and "Enabled" or "Disabled"
