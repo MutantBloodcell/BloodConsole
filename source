@@ -11168,6 +11168,370 @@ addcmd('unlight',{'nolight'},function(args, speaker)
 	end
 end)
 
+do
+	local ZONES = {
+		troll     = {label = "Antarctica/Troll (NO, UTC+0)", offset = 0},
+		neumayer  = {label = "Neumayer III (DE, UTC+0)", offset = 0},
+		mcmurdo   = {label = "McMurdo Station / South Pole (US, UTC+12)", offset = 12},
+		scott     = {label = "Scott Base (NZ, UTC+12)", offset = 12},
+		terranova = {label = "Terra Nova Bay (IT, UTC+12)", offset = 12},
+		ddu       = {label = "Dumont d'Urville (FR, UTC+10)", offset = 10},
+		casey     = {label = "Casey (AU, UTC+8)", offset = 8},
+		zhongshan = {label = "Zhongshan (CN, UTC+8)", offset = 8},
+		concordia = {label = "Concordia (FR/IT, UTC+8)", offset = 8},
+		davis     = {label = "Davis (AU, UTC+7)", offset = 7},
+		mirny     = {label = "Mirny (RU, UTC+7)", offset = 7},
+		vostok    = {label = "Vostok (RU, UTC+6)", offset = 6},
+		mawson    = {label = "Mawson (AU, UTC+5)", offset = 5},
+		syowa     = {label = "Syowa (JP, UTC+3)", offset = 3},
+		novo      = {label = "Novolazarevskaya (RU, UTC+3)", offset = 3},
+		sanae     = {label = "SANAE IV (ZA, UTC+2)", offset = 2},
+		rothera   = {label = "Rothera (UK, UTC-3)", offset = -3},
+		palmer    = {label = "Palmer (US, UTC-3)", offset = -3},
+		halley    = {label = "Halley (UK, UTC-3)", offset = -3},
+	}
+
+	local RT = {
+		enabled = false,
+		replicate = true,
+		multiplier = 1,
+		virtual = 0,
+		offset = 12,
+		station = "mcmurdo",
+		latitude = -90,
+		shape = "number",
+		remote = nil,
+		candidates = {},
+		lastScan = 0,
+		thread = nil,
+		saved = nil,
+		listening = {},
+	}
+
+	local function clockAt()
+		local t = os.date("!*t", os.time() + math.floor(RT.offset * 3600))
+		return (t.hour + (t.min / 60) + (t.sec / 3600)) % 24
+	end
+
+	local function timeString(clock)
+		local total = math.floor((clock % 24) * 3600)
+		return ("%02d:%02d:%02d"):format(math.floor(total / 3600), math.floor((total % 3600) / 60), total % 60)
+	end
+
+	local function applyLocal(clock)
+		Lighting.ClockTime = clock % 24
+		Lighting.GeographicLatitude = RT.latitude
+	end
+
+	local TIME_HINTS = {"time", "clock", "daynight", "daycycle", "lighting", "tod", "day", "night", "cycle"}
+
+	local function findTimeRemotes()
+		local found, seen = {}, {}
+		for _, root in ipairs({ReplicatedStorage, workspace}) do
+			local scanned = 0
+			for _, d in ipairs(root:GetDescendants()) do
+				scanned += 1
+				if scanned > 4000 then break end
+				if not seen[d] and (d:IsA("RemoteEvent") or d:IsA("UnreliableRemoteEvent") or d:IsA("RemoteFunction")) then
+					local n = d.Name:lower()
+					for _, hint in ipairs(TIME_HINTS) do
+						if n:find(hint, 1, true) then
+							seen[d] = true
+							found[#found + 1] = d
+							break
+						end
+					end
+				end
+			end
+		end
+		RT.lastScan = tick()
+		return found
+	end
+
+	local function fireRemote(remote, clock)
+		local shapes = (RT.shape == "auto") and {"number", "string"} or {RT.shape}
+		for _, shape in ipairs(shapes) do
+			pcall(function()
+				local args
+				if shape == "number" then
+					args = {math.floor((clock % 24) * 60)}
+				elseif shape == "clock" then
+					args = {clock % 24}
+				elseif shape == "string" then
+					args = {timeString(clock)}
+				elseif shape == "lighting" then
+					args = {Lighting, clock % 24}
+				else
+					args = {}
+				end
+				if remote:IsA("RemoteFunction") then
+					remote:InvokeServer(unpack(args))
+				else
+					remote:FireServer(unpack(args))
+				end
+			end)
+			task.wait(0.05)
+		end
+	end
+
+	local function push(clock)
+		if not RT.replicate then return 0 end
+		if not RT.remote and (#RT.candidates == 0 or tick() - RT.lastScan > 60) then
+			RT.candidates = findTimeRemotes()
+		end
+		local targets = RT.remote and {RT.remote} or RT.candidates
+		local sent = 0
+		for _, remote in ipairs(targets) do
+			if remote.Parent then
+				fireRemote(remote, clock)
+				sent += 1
+			end
+		end
+		return sent
+	end
+
+	local function stopEngine()
+		RT.enabled = false
+		if RT.thread then RT.thread:Disconnect() RT.thread = nil end
+		if RT.saved then
+			pcall(function()
+				Lighting.ClockTime = RT.saved.clock
+				Lighting.GeographicLatitude = RT.saved.latitude
+			end)
+			RT.saved = nil
+		end
+	end
+
+	local function startEngine()
+		if RT.enabled then stopEngine() end
+		if not RT.saved then
+			RT.saved = {clock = Lighting.ClockTime, latitude = Lighting.GeographicLatitude}
+		end
+		RT.enabled = true
+		RT.virtual = clockAt() * 3600
+
+		local last, lastSync = os.clock(), os.clock()
+		RT.thread = RunService.Heartbeat:Connect(function()
+			local now = os.clock()
+			local dt = now - last
+			last = now
+			RT.virtual = (RT.virtual + dt * RT.multiplier) % 86400
+			if RT.multiplier == 1 and now - lastSync > 20 then
+				lastSync = now
+				RT.virtual = clockAt() * 3600
+			end
+			pcall(applyLocal, RT.virtual / 3600)
+		end)
+
+		if RT.replicate then
+			task.spawn(function()
+				while RT.enabled do
+					push(RT.virtual / 3600)
+					task.wait(5)
+				end
+			end)
+		end
+	end
+
+	local function useDevice()
+		RT.offset = (os.time(os.date("*t")) - os.time(os.date("!*t"))) / 3600
+		RT.station = "device"
+		RT.virtual = clockAt() * 3600
+		push(RT.virtual / 3600)
+		return "Using your device timezone (UTC" .. (RT.offset >= 0 and "+" or "") .. RT.offset .. ")"
+	end
+
+	local function realtimeFunc(args, speaker)
+		local first = args[1] and args[1]:lower()
+		RT.multiplier = 1
+
+		if first == "local" then
+			RT.replicate = false
+		elseif first == "device" then
+			RT.replicate = true
+			useDevice()
+		else
+			RT.replicate = true
+			local key = first and first:gsub("[%s_%-]", "")
+			if key and ZONES[key] then
+				RT.station = key
+				RT.offset = ZONES[key].offset
+			end
+		end
+
+		startEngine()
+		local clock = RT.virtual / 3600
+		return ("Antarctica %s (%s)%s"):format(timeString(clock), ZONES[RT.station] and ZONES[RT.station].label or RT.station, RT.replicate and " — replicating" or " — local only")
+	end
+
+	overridecmd("realtime", realtimeFunc)
+	overridecmd("syncrealtime", realtimeFunc)
+	overridecmd("synctime", realtimeFunc)
+
+	addcmd("antarcticatime", {"attime", "rt"}, realtimeFunc)
+
+	addcmd("realtimeoff", {"rtoff", "unrealtime"}, function(args, speaker)
+		if not RT.enabled then return "Antarctica clock is not running" end
+		stopEngine()
+		return "Antarctica clock stopped, lighting restored"
+	end)
+
+	addcmd("rtstation", {"rtzone"}, function(args, speaker)
+		local key = args[1] and args[1]:lower():gsub("[%s_%-]", "")
+		if not key then
+			local names = {}
+			for k in pairs(ZONES) do names[#names + 1] = k end
+			table.sort(names)
+			return "Stations: " .. table.concat(names, ", ")
+		end
+		local zone = ZONES[key]
+		if not zone then return "Unknown station: " .. key end
+		RT.station = key
+		RT.offset = zone.offset
+		RT.virtual = clockAt() * 3600
+		push(RT.virtual / 3600)
+		return zone.label .. " -> " .. timeString(RT.virtual / 3600)
+	end)
+
+	addcmd("rtoffset", {}, function(args, speaker)
+		local hours = tonumber(args[1])
+		if not hours then return "rtoffset <hours>, e.g. -3" end
+		RT.offset = math.clamp(hours, -12, 14)
+		RT.station = "custom"
+		RT.virtual = clockAt() * 3600
+		push(RT.virtual / 3600)
+		return "Offset set to UTC" .. (RT.offset >= 0 and "+" or "") .. RT.offset
+	end)
+
+	addcmd("rtdevice", {"rtlocal"}, function(args, speaker)
+		return useDevice()
+	end)
+
+	addcmd("rtlat", {}, function(args, speaker)
+		local lat = tonumber(args[1])
+		if not lat then return "rtlat <degrees> — -90 is the pole, -78 is McMurdo" end
+		RT.latitude = math.clamp(lat, -90, 90)
+		if RT.enabled then applyLocal(RT.virtual / 3600) end
+		return "Geographic latitude " .. RT.latitude
+	end)
+
+	addcmd("rtwarp", {"antarcticawarp"}, function(args, speaker)
+		RT.multiplier = tonumber(args[1]) or 60
+		if not RT.enabled then startEngine() end
+		return "Antarctica clock warped x" .. RT.multiplier
+	end)
+
+	addcmd("rtunwarp", {}, function(args, speaker)
+		RT.multiplier = 1
+		return "Antarctica clock back to real speed"
+	end)
+
+	addcmd("rtprobe", {"rtfind"}, function(args, speaker)
+		RT.candidates = findTimeRemotes()
+		if #RT.candidates == 0 then
+			return "No remote with a time-ish name found — try rtchat or rtlisten"
+		end
+		local lines = {}
+		for i, remote in ipairs(RT.candidates) do
+			lines[#lines + 1] = ("%d. %s [%s] in %s"):format(i, remote.Name, remote.ClassName, remote.Parent and remote.Parent:GetFullName() or "?")
+		end
+		toClipboard(table.concat(lines, "\n"))
+		return ("%d candidate(s) copied — lock one with rtremote <number>"):format(#RT.candidates)
+	end)
+
+	addcmd("rtremote", {}, function(args, speaker)
+		local pick = args[1]
+		if not pick or pick:lower() == "none" then
+			RT.remote = nil
+			return "Remote lock cleared, using all candidates"
+		end
+		if #RT.candidates == 0 then RT.candidates = findTimeRemotes() end
+		local remote = RT.candidates[tonumber(pick)]
+		if not remote then return "No candidate #" .. tostring(pick) .. " — run rtprobe first" end
+		RT.remote = remote
+		return "Locked to " .. remote:GetFullName()
+	end)
+
+	addcmd("rtshape", {}, function(args, speaker)
+		local valid = {auto = true, number = true, clock = true, string = true, lighting = true, none = true}
+		local shape = args[1] and args[1]:lower()
+		if not shape or not valid[shape] then
+			return "Shapes: auto, number, clock, string, lighting, none"
+		end
+		RT.shape = shape
+		return "Payload shape: " .. shape
+	end)
+
+	addcmd("rtchat", {"rtchattime"}, function(args, speaker)
+		local stamp = timeString(RT.enabled and (RT.virtual / 3600) or clockAt())
+		for _, tpl in ipairs({"/time %s", ";time %s", ":time %s", "!time %s"}) do
+			pcall(chatMessage, tpl:format(stamp))
+			task.wait(0.1)
+		end
+		return "Chat-pushed " .. stamp .. " in 4 common formats"
+	end)
+
+	addcmd("rtpush", {}, function(args, speaker)
+		local clock = RT.enabled and (RT.virtual / 3600) or clockAt()
+		if not RT.remote and #RT.candidates == 0 then RT.candidates = findTimeRemotes() end
+		if not RT.remote and #RT.candidates == 0 then
+			return "No time remote found"
+		end
+		local sent = push(clock)
+		return ("Pushed %s to %d remote(s)"):format(timeString(clock), sent)
+	end)
+
+	addcmd("rtlisten", {}, function(args, speaker)
+		if #RT.listening > 0 then return "Already listening" end
+		local function hook(plr)
+			RT.listening[#RT.listening + 1] = plr.Chatted:Connect(function(msg)
+				local h, m, s = msg:match("(%d%d):(%d%d):(%d%d)")
+				if not h then return end
+				local clock = (tonumber(h) + tonumber(m) / 60 + tonumber(s) / 3600) % 24
+				RT.virtual = clock * 3600
+				if not RT.saved then
+					RT.saved = {clock = Lighting.ClockTime, latitude = Lighting.GeographicLatitude}
+				end
+				applyLocal(clock)
+			end)
+		end
+		for _, plr in ipairs(Players:GetPlayers()) do hook(plr) end
+		RT.listening[#RT.listening + 1] = Players.PlayerAdded:Connect(hook)
+		notify("Antarctica Listen", "Adopting HH:MM:SS from chat")
+	end)
+
+	addcmd("rtlistenoff", {}, function(args, speaker)
+		for _, con in ipairs(RT.listening) do pcall(function() con:Disconnect() end) end
+		RT.listening = {}
+		return "Listener off"
+	end)
+
+	addcmd("rtstatus", {}, function(args, speaker)
+		local clock = RT.enabled and (RT.virtual / 3600) or clockAt()
+		local zone = ZONES[RT.station]
+		return table.concat({
+			timeString(clock),
+			zone and zone.label or RT.station,
+			RT.enabled and ("running x" .. RT.multiplier) or "stopped",
+			"shape=" .. RT.shape,
+			"remotes=" .. tostring(RT.remote and 1 or #RT.candidates),
+			RT.remote and ("locked=" .. RT.remote.Name) or nil,
+		}, " | ")
+	end)
+
+	addcmdtext("realtime [station] [local]", "antarcticarealtime", "Syncs your clock to an Antarctica station and replicates it to other players")
+	addcmdtext("rtprobe", "antarcticaprobe", "Lists remotes with time-ish names so you can lock one")
+	addcmdtext("rtchat", "antarcticachat", "Chats the current time in four common admin prefixes")
+	addcmdtext("rtlisten", "antarcticalisten", "Adopt HH:MM:SS from anyone's chat")
+
+	for _, row in ipairs(CMDsF:GetChildren()) do
+		if row:IsA("TextButton") and row.Text:find("syncrealtime", 1, true) then
+			row:SetAttribute("Title", row.Text)
+			row:SetAttribute("Desc", "Syncs your clock to an Antarctica station and replicates it to other players")
+		end
+	end
+end
+
 addcmd('copytools',{},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players)do
