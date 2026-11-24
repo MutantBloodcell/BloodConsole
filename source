@@ -4812,6 +4812,9 @@ CMDs[#CMDs + 1] = {NAME = 'nobillboardgui / nobgui / noname', DESC = 'Removes bi
 CMDs[#CMDs + 1] = {NAME = 'loopnobgui / loopnoname', DESC = 'Loop removes billboard and surface GUIs from your players (i.e. name GUIs at cafes)'}
 CMDs[#CMDs + 1] = {NAME = 'unloopnobgui / unloopnoname', DESC = 'Disables loopnobgui'}
 CMDs[#CMDs + 1] = {NAME = 'noarms', DESC = 'Removes your arms'}
+CMDs[#CMDs + 1] = {NAME = 'syncrealtime / synctime / realtime', DESC = 'Synces time with your device time'}
+CMDs[#CMDs + 1] = {NAME = 'timewarp', DESC = 'Warps time'}
+CMDs[#CMDs + 1] = {NAME = 'untimewarp', DESC = 'Stops time warping'}
 CMDs[#CMDs + 1] = {NAME = 'nolegs', DESC = 'Removes your legs'}
 CMDs[#CMDs + 1] = {NAME = 'nolimbs', DESC = 'Removes your limbs'}
 CMDs[#CMDs + 1] = {NAME = 'naked (CLIENT)', DESC = 'Removes your clothing'}
